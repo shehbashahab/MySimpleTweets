@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate;
+package com.codepath.apps.MySimpleTweets;
 
 import android.content.Context;
 
@@ -27,25 +27,28 @@ public class TwitterClient extends OAuthBaseClient {
     public static final String REST_CONSUMER_KEY = "S8IRBV07UYbjA6wb4Um8Vy7oe";
     public static final String REST_CONSUMER_SECRET = "lINwkmVamQS9qmVEU6GjSR7PkpyUst0kRnIEyDDdiTe9OHdtKv";
     public static final String REST_CALLBACK_URL = "oauth://SS-CPTweetsApp";
+    int count = 25;
 
     public TwitterClient(Context context) {
         super(context, REST_API_CLASS, REST_URL, REST_CONSUMER_KEY, REST_CONSUMER_SECRET, REST_CALLBACK_URL);
     }
 
-    public void getHomeTimeline(AsyncHttpResponseHandler handler) {
-        String apiUrl = getApiUrl("statuses/home_timeline.json");
+    public void getHomeTimelineWithCount(AsyncHttpResponseHandler handler) {
         RequestParams params = new RequestParams();
-        params.put("count", 25);
-        params.put("since_id", 1);
-        getClient().get(apiUrl, params, handler);
+        params.put("count", count);
+        getHomeTimeline(handler, params);
     }
 
-	/* 1. Define the endpoint URL with getApiUrl and pass a relative path to the endpoint
-     * 	  i.e getApiUrl("statuses/home_timeline.json");
-	 * 2. Define the parameters to pass to the request (query or body)
-	 *    i.e RequestParams params = new RequestParams("foo", "bar");
-	 * 3. Define the request method and make a call to the client
-	 *    i.e client.get(apiUrl, params, handler);
-	 *    i.e client.post(apiUrl, params, handler);
-	 */
+    public void getHomeTimelineWithMaxId(AsyncHttpResponseHandler handler, long max_id) {
+
+        RequestParams params = new RequestParams();
+        params.put("max_id", max_id);
+        getHomeTimeline(handler, params);
+    }
+
+    public void getHomeTimeline(AsyncHttpResponseHandler handler, RequestParams params) {
+        String apiUrl = getApiUrl("statuses/home_timeline.json");
+        getClient().get(apiUrl, params, handler);
+
+    }
 }

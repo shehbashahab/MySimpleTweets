@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate.models;
+package com.codepath.apps.MySimpleTweets.models;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,7 +29,6 @@ public class Tweet {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
         //return the tweet object
         return tweet;

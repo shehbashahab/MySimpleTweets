@@ -1,4 +1,4 @@
-package com.codepath.apps.restclienttemplate;
+package com.codepath.apps.MySimpleTweets;
 
 import android.content.Context;
 
