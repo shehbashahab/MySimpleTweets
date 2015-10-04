@@ -28,7 +28,6 @@ import utils.EndlessScrollListener;
 
 public class TimelineActivity extends AppCompatActivity implements ComposeTweetDialog.EditNameDialogListener {
 
-    public final static String EXTRA_MESSAGE = "EMPTY";
     private TwitterClient client;
     private TweetsArrayAdapter aTweets;
     private ArrayList<Tweet> tweets;
@@ -121,8 +120,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetD
         // SUCCESS
         client.postTweet(tweetBody, new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
-                Log.d("DEBUG", json.toString());
+            public void onSuccess(int statusCode, Header[] headers, JSONObject success) {
+                populateTimeline();
             }
         });
     }
