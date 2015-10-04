@@ -1,7 +1,8 @@
 package com.codepath.apps.MySimpleTweets.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import com.codepath.apps.MySimpleTweets.R;
 import com.codepath.apps.MySimpleTweets.TwitterApplication;
 import com.codepath.apps.MySimpleTweets.TwitterClient;
 import com.codepath.apps.MySimpleTweets.adapters.TweetsArrayAdapter;
+import com.codepath.apps.MySimpleTweets.fragments.ComposeTweetDialog;
 import com.codepath.apps.MySimpleTweets.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -22,8 +24,9 @@ import java.util.ArrayList;
 
 import utils.EndlessScrollListener;
 
-public class TimelineActivity extends ActionBarActivity {
+public class TimelineActivity extends AppCompatActivity implements ComposeTweetDialog.EditNameDialogListener {
 
+    public final static String EXTRA_MESSAGE = "EMPTY";
     private TwitterClient client;
     private TweetsArrayAdapter aTweets;
     private ArrayList<Tweet> tweets;
@@ -90,6 +93,17 @@ public class TimelineActivity extends ActionBarActivity {
         }, max_id);
     }
 
+    private void postTweet(String tweetBody) {
+        // SUCCESS
+        client.postTweet(tweetBody, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
+                Log.d("DEBUG", json.toString());
+                //
+            }
+        });
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -103,12 +117,22 @@ public class TimelineActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_compose_tweet) {
+            showComposeTweetDialog();
         }
-
         return super.onOptionsItemSelected(item);
     }
+
+    private void showComposeTweetDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        ComposeTweetDialog composeTweetDialog = new ComposeTweetDialog();
+        composeTweetDialog.show(fm, "fragment_compose_tweet");
+    }
+
+    @Override
+    public void onFinishEditDialog(String inputText) {
+        postTweet(inputText);
+
+    }
+
 }
