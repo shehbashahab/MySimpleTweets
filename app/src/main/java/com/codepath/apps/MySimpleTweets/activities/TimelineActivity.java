@@ -2,6 +2,8 @@ package com.codepath.apps.MySimpleTweets.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -31,11 +33,30 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetD
     private TweetsArrayAdapter aTweets;
     private ArrayList<Tweet> tweets;
     private ListView lvTweets;
+    private SwipeRefreshLayout swipeContainer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                populateTimeline();
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
 
         lvTweets = (ListView) findViewById(R.id.lvTweets);
         tweets = new ArrayList<>();
@@ -58,6 +79,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetD
     // Fill the listview by creating the tweet objects from the json
     private void populateTimeline() {
         aTweets.clear();
+        tweets.clear();
         client.getHomeTimelineWithCount(new JsonHttpResponseHandler() {
             // SUCCESS
             @Override
@@ -73,6 +95,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetD
                 Log.d("DEBUG", "onFailure statusCode: " + statusCode);
             }
         });
+
+        swipeContainer.setRefreshing(false);
     }
 
     private void addNextSetOfTweets(long max_id) {
@@ -99,7 +123,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetD
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray json) {
                 Log.d("DEBUG", json.toString());
-                //
             }
         });
     }
@@ -132,7 +155,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetD
     @Override
     public void onFinishEditDialog(String inputText) {
         postTweet(inputText);
-
     }
 
 }
