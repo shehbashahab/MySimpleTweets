@@ -31,7 +31,7 @@ public class ComposeTweetDialog extends DialogFragment implements TextView.OnEdi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_compose_tweet, container);
-        getDialog().setTitle("What's on your mind?");
+        getDialog().setTitle("What's happening?");
         mEditText = (EditText) view.findViewById(R.id.etTweet);
         mEditText.requestFocus();
         mEditText.setGravity(Gravity.CENTER);

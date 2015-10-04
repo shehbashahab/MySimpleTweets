@@ -28,13 +28,12 @@
         android:id="@+id/tvCreatedAt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/tvBody"
         android:gravity="right"
-        android:layout_alignTop="@+id/tvFullName"
-        android:layout_toRightOf="@+id/tvUserName"
         android:singleLine="true"
-        android:text="Created At" />
-
+        android:text="Created At"
+        android:layout_alignTop="@+id/tvFullName"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/tvBody"

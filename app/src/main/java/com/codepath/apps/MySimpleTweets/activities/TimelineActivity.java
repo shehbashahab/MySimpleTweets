@@ -155,5 +155,4 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetD
     public void onFinishEditDialog(String inputText) {
         postTweet(inputText);
     }
-
 }

@@ -46,7 +46,7 @@ public class TweetsArrayAdapter extends ArrayAdapter<Tweet> {
 
         // 4. Populate data into the subviews
         tvFullName.setText(tweet.getUser().getName());
-        tvUserName.setText("@" + tweet.getUser().getScreenName());
+        tvUserName.setText(" @" + tweet.getUser().getScreenName());
         tvCreatedAt.setText(Utilities.getRelativeTimeAgo(tweet.getCreatedAt()));
         tvBody.setText(tweet.getBody());
         ivProfileImage.setImageResource(android.R.color.transparent); // clear out the old image for a recycled view
