@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:layout_toRightOf="@+id/ivProfileImage"
-        android:text="Full Name"
+        android:text="@string/label_full_name"
         android:textStyle="bold" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_alignTop="@+id/tvFullName"
         android:layout_centerHorizontal="true"
         android:layout_toRightOf="@id/tvFullName"
-        android:text="Username" />
+        android:text="@string/label_username" />
 
     <TextView
         android:id="@+id/tvCreatedAt"
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:gravity="right"
         android:singleLine="true"
-        android:text="Created At"
+        android:text="@string/label_created_at"
         android:layout_alignTop="@+id/tvFullName"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -46,7 +46,7 @@
         android:layout_toRightOf="@+id/ivProfileImage"
         android:autoLink="all"
         android:linksClickable="true"
-        android:text="Tweet" />
+        android:text="@string/label_tweet" />
 
     <ImageView
         android:id="@+id/ivProfileImage"

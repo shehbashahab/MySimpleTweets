@@ -31,7 +31,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetD
     private TwitterClient client;
     private TweetsArrayAdapter aTweets;
     private ArrayList<Tweet> tweets;
-    private ListView lvTweets;
     private SwipeRefreshLayout swipeContainer;
 
 
@@ -57,7 +56,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeTweetD
                 android.R.color.holo_red_light);
 
 
-        lvTweets = (ListView) findViewById(R.id.lvTweets);
+        ListView lvTweets = (ListView) findViewById(R.id.lvTweets);
         tweets = new ArrayList<>();
         aTweets = new TweetsArrayAdapter(this, tweets);
         lvTweets.setAdapter(aTweets);
