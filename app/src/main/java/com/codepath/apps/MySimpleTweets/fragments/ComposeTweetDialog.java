@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
@@ -14,7 +15,6 @@ import android.widget.TextView;
 
 import com.codepath.apps.MySimpleTweets.R;
 
-// ...
 public class ComposeTweetDialog extends DialogFragment implements TextView.OnEditorActionListener {
 
     public interface EditNameDialogListener {
@@ -31,7 +31,7 @@ public class ComposeTweetDialog extends DialogFragment implements TextView.OnEdi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_compose_tweet, container);
-        getDialog().setTitle("What's happening?");
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         mEditText = (EditText) view.findViewById(R.id.etTweet);
         mEditText.requestFocus();
         mEditText.setGravity(Gravity.CENTER);
