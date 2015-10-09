@@ -27,7 +27,7 @@ public class ComposeTweetDialog extends DialogFragment implements TextView.OnEdi
         }
 
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            tvCharCount.setText(String.valueOf(s.length()));
+            tvCharCount.setText(String.valueOf(140 - s.length()));
         }
 
         public void afterTextChanged(Editable s) {
