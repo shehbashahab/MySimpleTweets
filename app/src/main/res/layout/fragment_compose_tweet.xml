@@ -4,20 +4,43 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:background="@drawable/dialog_bg"
     android:orientation="vertical"
     android:padding="10dp">
 
-    <TextView
-        android:id="@+id/tvInstructionalText"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/instructional_text" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <!--        <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel" />-->
+
+        <TextView
+            android:id="@+id/tvCharCount"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent" />
+
+        <!--  <Button
+              android:id="@+id/btnTweet"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Tweet" />-->
+    </LinearLayout>
 
     <EditText
         android:id="@+id/etTweet"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:hint="What's happening?"
         android:imeOptions="actionDone"
         android:inputType="textMultiLine"
-        android:scrollbars="vertical"/>
+        android:lines="6"
+        android:maxLength="140"
+        android:scrollbars="vertical" />
+
 </LinearLayout>
